@@ -1,6 +1,11 @@
 import React from "react";
-import { Paper } from "material-ui";
+import { Paper, Typography } from "material-ui";
 
 export default props => (
-  <Paper style={props.styles.Paper}>Right Pane is for real</Paper>
+  <Paper style={props.styles.Paper}>
+    <Typography variant="display1">Welcome to the eLibrary</Typography>
+    <Typography variant="subheading">
+      Pick one of the books on the left pane.
+    </Typography>
+  </Paper>
 );

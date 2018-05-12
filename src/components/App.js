@@ -9,23 +9,34 @@ export default class App extends Component {
     books
   };
 
-  getBooksByTag() {
-    return Object.entries(this.state.books.reduce((books, book) => {
-      const { tag } = books;
-      books[tag] = books[tag] ? [...books[tag], book] : [book];
-
-      return books;
-    }, {})
-    )
+  getBooksbyTags(objectArray, property) {
+    return objectArray.reduce(function(acc, obj) {
+      var key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
   }
 
+  handleTagSelected = tag => {
+    this.setState({
+      tag
+    });
+  };
+
   render() {
-    console.log(this.getBooksByTag());
+    const books = Object.entries(this.getBooksbyTags(this.state.books, "tag"));
     return (
       <div>
         <Header />
-        <Elibrary />
-        <Footer tags={tags} />
+        <Elibrary books={books} tag={this.state.tag} />
+        <Footer
+          tags={tags}
+          onSelect={this.handleTagSelected}
+          tag={this.state.tag}
+        />
       </div>
     );
   }
