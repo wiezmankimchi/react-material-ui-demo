@@ -14,14 +14,14 @@ const styles = {
   }
 };
 
-export default ({ books, tag }) => (
+export default ({ books, tag, onSelect, bookSelected }) => (
   <Grid container spacing={8}>
     <Grid item sm>
-      <Leftpane styles={styles} books={books} tag={tag} />
+      <Leftpane styles={styles} books={books} tag={tag} onSelect={onSelect} />
     </Grid>
 
     <Grid item sm>
-      <Rightpane styles={styles} />
+      <Rightpane styles={styles} bookSelected={bookSelected} />
     </Grid>
   </Grid>
 );

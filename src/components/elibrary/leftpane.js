@@ -3,21 +3,21 @@ import React from "react";
 import { Paper, Typography, List } from "material-ui";
 import { ListItem, ListItemText } from "material-ui/List";
 
-export default props => (
-  <Paper style={props.styles.Paper}>
-    {props.books.map(
+export default ({ styles, books, tag, onSelect }) => (
+  <Paper style={styles.Paper}>
+    {books.map(
       ([tags, books]) =>
-        !props.tag || props.tag === tags ? (
-          <React.Fragment>
+        !tag || tag === tags ? (
+          <React.Fragment key={tags}>
             <Typography
               variant="title"
               style={{ textTransform: "capitalized" }}
             >
               {tags}
               <List component="ul">
-                {books.map(book => (
-                  <ListItem button>
-                    <ListItemText primary={book.title} />
+                {books.map(({ title, id }) => (
+                  <ListItem button onClick={() => onSelect(id)} key={id}>
+                    <ListItemText primary={title} />
                   </ListItem>
                 ))}
               </List>

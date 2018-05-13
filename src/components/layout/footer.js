@@ -18,7 +18,7 @@ export default props => {
         centered
       >
         <Tab label="All" />
-        {props.tags.map(tag => <Tab label={tag} />)}
+        {props.tags.map(tag => <Tab label={tag} key={tag} />)}
       </Tabs>
     </Paper>
   );

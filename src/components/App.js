@@ -6,7 +6,8 @@ import { tags, books } from "../store.js";
 
 export default class App extends Component {
   state = {
-    books
+    books,
+    bookSelected: {}
   };
 
   getBooksbyTags(objectArray, property) {
@@ -26,12 +27,24 @@ export default class App extends Component {
     });
   };
 
+  handleClickedBook = id => {
+    this.setState(({ books }) => ({
+      bookSelected: books.find(book => book.id === id)
+    }));
+  };
+
   render() {
-    const books = Object.entries(this.getBooksbyTags(this.state.books, "tag"));
+    const books = Object.entries(this.getBooksbyTags(this.state.books, "tag")),
+      { bookSelected } = this.state;
     return (
       <div>
         <Header />
-        <Elibrary books={books} tag={this.state.tag} />
+        <Elibrary
+          bookSelected={this.state.bookSelected}
+          books={books}
+          tag={this.state.tag}
+          onSelect={this.handleClickedBook}
+        />
         <Footer
           tags={tags}
           onSelect={this.handleTagSelected}
